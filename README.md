@@ -115,7 +115,7 @@ Please refer to the following for the difference between J option and G option.
 e.g.
 
 ```
-./container_start_test.sh -fsample.jmx -GTHREAD=10 -GRAMPUP=10 -GLOOP=1
+./container_start_test.sh -f sample.jmx -GTHREAD=10 -GRAMPUP=10 -GLOOP=1
 ```
 
 ### Get the result
