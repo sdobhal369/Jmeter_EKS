@@ -38,7 +38,7 @@ echo "Creating Namespace: $tenant"
 
 kubectl create namespace $tenant
 
-echo "Namspace $tenant has been created"
+echo "Namespace $tenant has been created"
 
 echo "Creating Jmeter slave nodes"
 
