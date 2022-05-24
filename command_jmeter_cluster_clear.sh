@@ -15,30 +15,18 @@ kubectl version --short
 
 echo "Current list of namespaces on the kubernetes cluster:"
 
-echo
-
 kubectl get namespaces | grep -v NAME | awk '{print $1}'
-
-echo
 
 echo "Enter the name of the tenant name, this will be used to delete the namespace"
 read tenant
-echo
-
 
 echo "Delete Jmeter slave nodes"
 
 nodes=`kubectl get no | egrep -v "master|NAME" | wc -l`
 
-echo
-
 echo "Number of worker nodes on this cluster is " $nodes
 
-echo
-
 echo "Delete $nodes Jmeter slave replicas and service"
-
-echo
 
 kubectl delete -n $tenant -f $working_dir/jmeter_slaves_deploy.yaml
 
