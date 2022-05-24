@@ -15,15 +15,10 @@ kubectl version --short
 
 echo "Current list of namespaces on the kubernetes cluster:"
 
-echo
-
 kubectl get namespaces | grep -v NAME | awk '{print $1}'
-
-echo
 
 echo "Enter the name of the new tenant unique name, this will be used to create the namespace"
 read tenant
-echo
 
 #Check If namespace exists
 
@@ -39,28 +34,19 @@ then
   exit 1
 fi
 
-echo
 echo "Creating Namespace: $tenant"
 
 kubectl create namespace $tenant
 
 echo "Namspace $tenant has been created"
 
-echo
-
 echo "Creating Jmeter slave nodes"
 
 nodes=`kubectl get no | egrep -v "master|NAME" | wc -l`
 
-echo
-
 echo "Number of worker nodes on this cluster is " $nodes
 
-echo
-
 echo "Creating $nodes Jmeter slave replicas and service"
-
-echo
 
 kubectl create -n $tenant -f $working_dir/jmeter_slaves_deploy.yaml
 
@@ -71,8 +57,6 @@ echo "Creating Jmeter Master"
 kubectl create -n $tenant -f $working_dir/jmeter_master_configmap.yaml
 
 kubectl create -n $tenant -f $working_dir/jmeter_master_deploy.yaml
-
-echo
 
 kubectl get -n $tenant all
 
