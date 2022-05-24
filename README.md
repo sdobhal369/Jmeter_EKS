@@ -1,6 +1,6 @@
 # Jmeter load test with Fargate for AWS EKS
 
-It is inspire to [GoogleCloudPlatform/distributed-load-testing-using-kubernetes](https://github.com/GoogleCloudPlatform/distributed-load-testing-using-kubernetes) and refer to [kaarolch/kubernetes-jmeter](https://github.com/kaarolch/kubernetes-jmeter),[kubernauts/jmeter-kubernetes](https://github.com/kubernauts/jmeter-kubernetes)
+It is inspired by [GoogleCloudPlatform/distributed-load-testing-using-kubernetes](https://github.com/GoogleCloudPlatform/distributed-load-testing-using-kubernetes) and refer to [kaarolch/kubernetes-jmeter](https://github.com/kaarolch/kubernetes-jmeter),[kubernauts/jmeter-kubernetes](https://github.com/kubernauts/jmeter-kubernetes)
 
 **Prerequisits**
 
@@ -12,9 +12,9 @@ eksctl > v0.11.10
 ### Build docker image
 ---
 
-The following script it is build jmeter master image and jmeter slave image.
+The following script will build jmeter master image and jmeter slave image.
 If you want to use without local, you must register image somewhere registry service.
- e.g.) ECR,DockerHub
+ (e.g. ECR,DockerHub etc.)
 
 ```
 ./command_docker_image_create.sh
@@ -23,7 +23,7 @@ If you want to use without local, you must register image somewhere registry ser
 ### Build EKS with eksctl command
 ---
 
-Install eksctrl with refer to the guide.
+Install eksctl with refer to the guide.
 [Getting Started with eksctl
 ](https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/getting-started-eksctl.html)
 
@@ -44,10 +44,10 @@ eksctl delete cluster --name <CLUSTER_NAME>
 ### Build JMeter cluster
 ---
 
-The following script is make namespace (you must specified it), create node, slave replicas and service, and master deployment.
+The following script will make namespace (you must specified it), create node, slave replicas and service, and master deployment.
 
-If you want to use an ECR Image.
-You need to change the following line.
+If you want to use AWS ECR Image.
+You need to change the image name.
 
 L:21 in jmeter_master_deploy.yaml
 ```
@@ -103,11 +103,11 @@ You can delete resources created by command_jmeter_cluster_create.sh
 ---
 
 ```
-./container_start_test.sh -fsample.jmx
+./container_start_test.sh -f sample.jmx
 ```
-It need specify jmx file path with [-f] option.
+You need to specify jmx file path with [-f] option.
 And If you need specify option for the test scenario.
-You can specied [-G] or [-J] options.
+You can specify by using [-G] or [-J] options.
 Please refer to the following for the difference between J option and G option.
 
 [1.4.6 Overriding Properties Via The Command Line](https://jmeter.apache.org/usermanual/get-started.html#override)
@@ -127,10 +127,8 @@ e.g.
 It download result.jtl file to the report directory.
 
 
-### Scaling
+### Scaling pods
 ---
-
-#### Scaling pods
 
 Just change the number of replicas.
 
